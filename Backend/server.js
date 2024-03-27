@@ -2,6 +2,7 @@
 //? 2) npm install express
 //? *instally nodemon bch kol mata3mal changes 3al file server yauto yrefrechi
 const express = require("express");
+const mongoose = require("mongoose");
 
 //? bch tnajm test3ml el environment variables eli mawjodin fi .env file
 require("dotenv").config();
@@ -12,7 +13,7 @@ const workoutRoutes = require("./routes/workouts");
 //? 3)tasna3 express app
 const app = express();
 
-//? middleware
+//! middleware
 //? *tchof kana fama data fi req (req.body) tatachih fi req object bch tnjm mb3d taccessih fi traitement (DELETE, Patch)
 app.use(express.json());
 
@@ -21,12 +22,18 @@ app.use((req, res, next) => {
   next();
 });
 
-//? routes
-app.use("/api/Workouts", workoutRoutes);
+//! routes
+app.use("/api/workouts", workoutRoutes);
 
-//? 4)lzm tasna3 port bch tnjm ta3ml listening lil requests
-app.listen(process.env.PORT, () => {
-  console.log("Listening on port", process.env.PORT);
-});
+//! connect to db
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    //? *tasna3 port bch tnjm ta3ml listening lil requests
+    app.listen(process.env.PORT, () => {
+      console.log("Connected to MongoDB :)\nListening on port", process.env.PORT);
+    });
+  })
+  .catch((err) => console.log("Failed to connect to MongoDB :(", err));
 
-//? 5)tnjm tw sa7by tlancy server using the commande: nodemon server.js
+//? 5)tnjm tw tlancy server using the commande: nodemon server.js / npm run dev
