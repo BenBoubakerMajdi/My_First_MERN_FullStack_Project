@@ -1,4 +1,4 @@
-//? 1) first open backend file and npm init -y (-y bch isir linstallation mt3 dependecies toul)
+//? 1) first open backend file and npm init -y (-y bch isir linstallation mt3 nodejs dependecies)
 //? 2) npm install express
 //? *instally nodemon bch kol mata3mal changes 3al file server yauto yrefrechi
 const express = require("express");
@@ -8,13 +8,15 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 //? *bch timporty routes o test3mlhom fil app ta3ml app.use(route haka)
-const workoutRoutes = require("./routes/workouts");
+const workoutSplitRoutes = require("./Routes/workoutSplitRoutes");
+const workoutDayRoutes = require("./Routes/workoutSplitRoutes");
+const exerciseRoutes = require("./Routes/workoutSplitRoutes");
 
 //? 3)tasna3 express app
 const app = express();
 
 //! middleware
-//? *tchof kana fama data fi req (req.body) tatachih fi req object bch tnjm mb3d taccessih fi traitement (DELETE, Patch)
+//? *tchof kana fama data fi req (req.body) tatachih fi req object bch tnjm mb3d taccessih ki t3ml traitement
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -23,7 +25,9 @@ app.use((req, res, next) => {
 });
 
 //! routes
-app.use("/api/workouts", workoutRoutes);
+app.use("/workout-split", workoutSplitRoutes);
+app.use("/workout-day", workoutDayRoutes);
+app.use("/exercise", exerciseRoutes);
 
 //! connect to db
 mongoose
@@ -31,7 +35,10 @@ mongoose
   .then(() => {
     //? *tasna3 port bch tnjm ta3ml listening lil requests
     app.listen(process.env.PORT, () => {
-      console.log("Connected to MongoDB :)\nListening on port", process.env.PORT);
+      console.log(
+        "Connected to MongoDB :)\nListening on port",
+        process.env.PORT
+      );
     });
   })
   .catch((err) => console.log("Failed to connect to MongoDB :(", err));
