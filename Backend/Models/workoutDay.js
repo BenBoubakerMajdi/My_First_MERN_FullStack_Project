@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const exercise = require("./exercise");
 
 const Schema = mongoose.Schema;
 
@@ -13,13 +14,24 @@ const workoutDaySchema = new Schema(
       type: String,
       required: false,
     },
-    
-    exercises: [{
+
+    exercises: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'exercise'
-    }]
+        ref: "exercise",
+      },
+    ],
   },
   { timestamps: true }
 );
+
+workoutDaySchema.pre("deleteMany", async function (next) {
+  try {
+    await exercise.deleteMany({ _id: { $in: this.exercises } });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = mongoose.model("workoutDay", workoutDaySchema);
