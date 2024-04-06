@@ -1,31 +1,20 @@
 const express = require("express");
+const {
+  getAllWorkoutDays,
+  getWorkoutDay,
+  createWorkoutDay,
+  deleteWorkoutDay,
+  updateWorkoutDay,
+} = require("../Controllers/workoutDayController");
+
+const { handleDeleteWorkoutDay } = require("../Middelware/handleDelete")
 
 const workoutDayRoutes = express.Router();
 
-//? 1) tasna3 routes mt3inak
-//*GET all workout days
-workoutDayRoutes.get("/get", (req, res) => {
-  res.json({ mssg: "api ye5dm jwh behy" });
-});
-
-//*GET a single workout day
-workoutDayRoutes.get("/get/:id", (req, res) => {
-  res.json({ mssg: "api ye5dm jwh behy" });
-});
-
-//*POST a new workout day
-workoutDayRoutes.post("/post", (req, res) => {
-  res.json({ mssg: "api ye5dm jwh behy" });
-});
-
-//*DELETE a workout day
-workoutDayRoutes.delete("/remove/:id", (req, res) => {
-  res.json({ mssg: "api ye5dm jwh behy" });
-});
-
-//*UPDATE a workout day
-workoutDayRoutes.patch("/update/:id", (req, res) => {
-  res.json({ mssg: "api ye5dm jwh behy" });
-});
+workoutDayRoutes.get("/get/:id_WorkoutSplit", getAllWorkoutDays);
+workoutDayRoutes.get("/get-day/:id", getWorkoutDay);
+workoutDayRoutes.post("/post/:id_WorkoutSplit", createWorkoutDay);
+workoutDayRoutes.delete("/remove/:id_WorkoutSplit", handleDeleteWorkoutDay, deleteWorkoutDay);
+workoutDayRoutes.patch("/update/:id", updateWorkoutDay);
 
 module.exports = workoutDayRoutes;

@@ -1,30 +1,18 @@
-const express = require('express');
+const express = require("express");
+const {
+  getAllExercises,
+  getExercise,
+  createExercise,
+  deleteExercise,
+  updateExercise,
+} = require("../Controllers/exerciceController");
 
 const exerciseRoutes = express.Router();
 
-//*GET all Exercises
-exerciseRoutes.get("/get/:workoutDayID", (req, res) => {
-    res.json({mssg: "api ye5dm jwh behy"})
-});
-
-//*GET a single exercise
-exerciseRoutes.get("/get/:id", (req, res) => {
-    res.json({mssg: "api ye5dm jwh behy"})
-});
-
-//*POST a new exercise
-exerciseRoutes.post("/post", (req, res) => {
-    res.json({mssg: "api ye5dm jwh behy"})
-});
-
-//*DELETE a exercise
-exerciseRoutes.delete("/remove", (req, res) => {
-    res.json({mssg: "api ye5dm jwh behy"})
-});
-
-//*UPDATE a exercise
-exerciseRoutes.patch("/update/:id", (req, res) => {
-    res.json({mssg: "api ye5dm jwh behy"})
-});
+exerciseRoutes.get("/get/:id_WorkoutDay", getAllExercises);
+exerciseRoutes.get("/get-exercise/:id", getExercise);
+exerciseRoutes.post("/post/:id_WorkoutDay", createExercise);
+exerciseRoutes.delete("/remove/:id_WorkoutDay", deleteExercise);
+exerciseRoutes.patch("/update/:id", updateExercise);
 
 module.exports = exerciseRoutes;

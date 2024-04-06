@@ -9,8 +9,8 @@ require("dotenv").config();
 
 //? *bch timporty routes o test3mlhom fil app ta3ml app.use(route haka)
 const workoutSplitRoutes = require("./Routes/workoutSplitRoutes");
-const workoutDayRoutes = require("./Routes/workoutSplitRoutes");
-const exerciseRoutes = require("./Routes/workoutSplitRoutes");
+const workoutDayRoutes = require("./Routes/workoutDayRoutes");
+const exerciseRoutes = require("./Routes/exerciseRoutes");
 
 //? 3)tasna3 express app
 const app = express();
@@ -44,3 +44,9 @@ mongoose
   .catch((err) => console.log("Failed to connect to MongoDB :(", err));
 
 //? 5)tnjm tw tlancy server using the commande: nodemon server.js / npm run dev
+
+
+
+
+
+//! lzm ki isit creation lworkout day yetsajal fi workout days db o fil field mt3 specific workout split mt3h

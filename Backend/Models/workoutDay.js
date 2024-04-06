@@ -25,13 +25,4 @@ const workoutDaySchema = new Schema(
   { timestamps: true }
 );
 
-workoutDaySchema.pre("deleteMany", async function (next) {
-  try {
-    await exercise.deleteMany({ _id: { $in: this.exercises } });
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
 module.exports = mongoose.model("workoutDay", workoutDaySchema);

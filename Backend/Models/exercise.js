@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const workoutDay = require("./workoutDay");
 
 const Schema = mongoose.Schema;
 
@@ -10,7 +11,7 @@ const exerciseSchema = new Schema(
     },
 
     set_range: {
-      type: Number,
+      type: String,
       required: true,
     },
 
@@ -20,12 +21,12 @@ const exerciseSchema = new Schema(
     },
 
     load: {
-      type: Number,
-      required: false,
+      type: String,
+      required: true,
     },
 
     pr: {
-      type: Number,
+      type: String,
       required: false,
     },
 
